@@ -1,0 +1,19 @@
+body{
+    background: url('assets/background.jpeg');
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.row{
+    margin-top: 30px;
+}
+
+.container{
+    background: rgba(255,255,255,.7);
+    min-height: 100vh;
+}
+
+#findButton{
+    background-color: black;
+    color: white;
+}
