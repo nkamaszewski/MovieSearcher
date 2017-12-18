@@ -4,6 +4,7 @@ const findButton = document.querySelector('#findButton');
 const findInput = document.querySelector('#findInput');
 const tableWithMovies = document.querySelector('.results');
 var ids =[];
+var page = 1; //default value
 
 findButton.addEventListener("click", findMovie);
 
@@ -11,6 +12,10 @@ findInput.addEventListener("keydown", (event)=>{
     if(event.keyCode === 13)
         findMovie();
 });
+
+function getUrl(){
+    
+}
 
 function findMovie(){
     let tempUrl = url + findInput.value;
@@ -27,7 +32,7 @@ function findMovie(){
                for(let index in myMovieList){
                 let i = index;
                 i++;
-                
+
                 // if there is no photo in API base
                 myMovieList[index].Poster = myMovieList[index].Poster === "N/A" ? "assets/noImg.jpg" : myMovieList[index].Poster;              
                 
@@ -44,6 +49,10 @@ function findMovie(){
 
         })
     }
+
+function changePage(value){
+
+}
            
    // http://www.omdbapi.com/?apikey=1060572d&s=
 
