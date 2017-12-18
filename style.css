@@ -2,6 +2,7 @@ body{
     background: url('assets/background.jpeg');
     background-size: cover;
     min-height: 100vh;
+   
 }
 
 .row{
@@ -11,6 +12,8 @@ body{
 .container{
     background: rgba(255,255,255,.7);
     min-height: 100vh;
+    transition: .5s;
+    -webkit-transition: .5s;
 }
 
 #findButton{
@@ -21,4 +24,28 @@ body{
 .minImg{
    width: 87px;
    height: 100px;
+}
+
+.details{
+    z-index: 10;
+    height: 100vh;
+    width: 0px;
+    position: absolute;
+    display: none;
+}
+
+.myCard{
+    left:40%;
+}
+
+tr, .myClose, .myButton{
+    cursor: pointer;
+}
+
+
+
+@media(max-width: 600px){
+    .myCard{
+        left: 0px;
+    }
 }

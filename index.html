@@ -9,6 +9,17 @@
     <title>Document</title>
 </head>
 <body>
+
+    <div class="details">
+            
+            <div class="card myCard" style="width: 25rem">
+                    <!-- <button type="button" class="btn btn-dark myClose" onclick="closeDetails()">Close <span class="float-right" style="margin-right: 10px;">x</span></button>
+                    <img class="card-img-top detailImg" src="assets/noImg.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div> -->
+            </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col text-center">
@@ -20,7 +31,7 @@
                     <input type="text" class="form-control" id="findInput" placeholder="Enter Your movie" autofocus="true">
             </div>
             <div class="col-sm-12 col-md-3">
-                    <button type="button" class="btn btn-block" id="findButton">Find movie</button>
+                    <button type="button" class="btn btn-block myButton" id="findButton">Find movie</button>
             </div>
         </div>
         <div class="row rowDetail">
@@ -43,8 +54,8 @@
         </div>
         <div class="row">
             <div class="col-12">
-              <button type="button" class="btn btn-dark float-left" onclick="changePage('previous')">Previous Page</button>
-              <button type="button" class="btn btn-dark float-right" onclick="changePage('next')">Next Page</button>
+              <button type="button" class="btn btn-dark float-left myButton" onclick="changePage('previous')">Previous Page</button>
+              <button type="button" class="btn btn-dark float-right myButton" onclick="changePage('next')">Next Page</button>
             </div>
             <div class="col-12 pageCounter">
                 
