@@ -34,36 +34,34 @@ function renderMovieList(tempUrl){
                for(let index in myMovieList){
                 let i = index;
                 i++;
-
                 // if there is no photo in API base
                 myMovieList[index].Poster = myMovieList[index].Poster === "N/A" ? "assets/noImg.jpg" : myMovieList[index].Poster;                         
-                details += `<tr>
+                details += `<tr data-parameter="${index}">
                             <th scope="row">-</th>
                             <td><img src="${myMovieList[index].Poster}" class="minImg"></td>
                             <td>${myMovieList[index].Title}</td>
                             <td>${myMovieList[index].Year}</td>
                             </tr>`;
-                ids[index] = myMovieList[index].imdbID;
+                ids[i] = myMovieList[index].imdbID;
                } 
                tableWithMovies.innerHTML = details;
+               listenOnRows();
             }
         })
     showPageCounter();
+    
 }
 
 
 function changePage(value){
     if(value === "next"){
-        page++;
-        let userUrl = url + findInput.value + "&page=" + page;
-        renderMovieList(userUrl);
+        page++;       
     }else{
         page = page <= 1? 1: page-1;
-        let userUrl = url + findInput.value + "&page=" + page;
-        console.log(userUrl);
-        renderMovieList(userUrl);
     }
-showPageCounter();
+    let userUrl = url + findInput.value + "&page=" + page;
+    renderMovieList(userUrl);
+    showPageCounter();
 }
   
 function showPageCounter(){
@@ -71,4 +69,17 @@ function showPageCounter(){
 }
   
 
+function listenOnRows(){
+    let rows = document.querySelectorAll('tr');
+    for(let i = 1; i < rows.length; i++){
+        rows[i].addEventListener("click", ()=>{
+            console.log(rows[i]);
+            console.log(ids[i]); 
+        })
+    }
+}
+
+function renderMovieDetails(){
+    
+}
 // details
