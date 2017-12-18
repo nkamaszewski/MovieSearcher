@@ -3,6 +3,7 @@ const url = "http://www.omdbapi.com/?apikey=" + myApiKey + "&s=";
 const findButton = document.querySelector('#findButton');
 const findInput = document.querySelector('#findInput');
 const tableWithMovies = document.querySelector('.results');
+const pageCounter = document.querySelector('.pageCounter');
 var ids =[];
 var page = 1; //default value
 
@@ -13,12 +14,13 @@ findInput.addEventListener("keydown", (event)=>{
         findMovie();
 });
 
-function getUrl(){
-    
+function findMovie(){
+    page = 1;
+    let userUrl = url + findInput.value + "&page=" + page;
+    renderMovieList(userUrl);
 }
 
-function findMovie(){
-    let tempUrl = url + findInput.value;
+function renderMovieList(tempUrl){
     fetch(tempUrl)
         .then((response)=>  response.json())
         .then((data)=> {
@@ -34,10 +36,9 @@ function findMovie(){
                 i++;
 
                 // if there is no photo in API base
-                myMovieList[index].Poster = myMovieList[index].Poster === "N/A" ? "assets/noImg.jpg" : myMovieList[index].Poster;              
-                
+                myMovieList[index].Poster = myMovieList[index].Poster === "N/A" ? "assets/noImg.jpg" : myMovieList[index].Poster;                         
                 details += `<tr>
-                            <th scope="row">${i}</th>
+                            <th scope="row">-</th>
                             <td><img src="${myMovieList[index].Poster}" class="minImg"></td>
                             <td>${myMovieList[index].Title}</td>
                             <td>${myMovieList[index].Year}</td>
@@ -46,14 +47,28 @@ function findMovie(){
                } 
                tableWithMovies.innerHTML = details;
             }
-
         })
-    }
+    showPageCounter();
+}
+
 
 function changePage(value){
-
+    if(value === "next"){
+        page++;
+        let userUrl = url + findInput.value + "&page=" + page;
+        renderMovieList(userUrl);
+    }else{
+        page = page <= 1? 1: page-1;
+        let userUrl = url + findInput.value + "&page=" + page;
+        console.log(userUrl);
+        renderMovieList(userUrl);
+    }
+showPageCounter();
 }
-           
-   // http://www.omdbapi.com/?apikey=1060572d&s=
+  
+function showPageCounter(){
+    pageCounter.innerHTML = `<h5 class="text-center">Page ${page}</h5>`;
+}
+  
 
-//  and pages add to result (up to 10), details
+// details
