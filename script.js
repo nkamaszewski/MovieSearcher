@@ -3,7 +3,7 @@ const url = "http://www.omdbapi.com/?apikey=" + myApiKey + "&s=";
 const findButton = document.querySelector('#findButton');
 const findInput = document.querySelector('#findInput');
 const tableWithMovies = document.querySelector('.results');
-
+var ids =[];
 
 findButton.addEventListener("click", findMovie);
 
@@ -26,13 +26,18 @@ function findMovie(){
                let details = "";
                for(let index in myMovieList){
                 let i = index;
-                i++;                
+                i++;
+                
+                // if there is no photo in API base
+                myMovieList[index].Poster = myMovieList[index].Poster === "N/A" ? "assets/noImg.jpg" : myMovieList[index].Poster;              
+                
                 details += `<tr>
                             <th scope="row">${i}</th>
                             <td><img src="${myMovieList[index].Poster}" class="minImg"></td>
                             <td>${myMovieList[index].Title}</td>
                             <td>${myMovieList[index].Year}</td>
                             </tr>`;
+                ids[index] = myMovieList[index].imdbID;
                } 
                tableWithMovies.innerHTML = details;
             }
@@ -40,36 +45,6 @@ function findMovie(){
         })
     }
            
+   // http://www.omdbapi.com/?apikey=1060572d&s=
 
-
-// function findMovie(){
-//     let tempUrl = url + findInput.value;
-//     fetch(tempUrl)
-//         .then((response)=>  response.json())
-//         .then((movie)=> {
-//             if(movie.Response === "True"){
-//             let details = `<h2>${movie.Title}</h2>
-//             <ul>
-//                 <li><b>Year:</b> ${movie.Year}</li>
-//                 <li><b>Genre:</b> ${movie.Genre}</li>
-//                 <li><b>Runtime:</b> ${movie.Runtime}</li>
-//                 <li><b>Director:</b> ${movie.Director}</li>
-//                 <li><b>Actors:</b> ${movie.Actors}</li>
-//                 <li><b>Awards:</b> ${movie.Awards}</li>
-//                 <li><b>Plot:</b> ${movie.Plot}</li>
-//             </ul>`;
-
-//             let poster = `<img src="${movie.Poster}">`;
-
-//             detailsMovie.innerHTML = details;
-//             posterMovie.innerHTML = poster;
-//             }else{
-//                 let details = `<h5>That film is not avalaible in omdbAPI.</h5>`
-//                 detailsMovie.innerHTML = "";
-//                 posterMovie.innerHTML = details;     
-//             }
-//         })
-// }
-
-
-
+//  and pages add to result (up to 10), details
