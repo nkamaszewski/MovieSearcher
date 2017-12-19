@@ -33,10 +33,14 @@ function renderMovieList(tempUrl){
                for(let index in myMovieList){
                 let i = index;
                 i++;
+
+                if(page>1){
+                    i += (page*10);
+                }
                 // if there is no photo in API base
                 myMovieList[index].Poster = myMovieList[index].Poster === "N/A" ? "assets/noImg.jpg" : myMovieList[index].Poster;                         
                 details += `<tr data-id="${myMovieList[index].imdbID}">
-                            <th scope="row">-</th>
+                            <th scope="row">${i}</th>
                             <td><img src="${myMovieList[index].Poster}" class="minImg"></td>
                             <td>${myMovieList[index].Title}</td>
                             <td>${myMovieList[index].Year}</td>
@@ -97,7 +101,16 @@ function renderMovieDetails(){
                 <li><b>Actors:</b> ${data.Actors}</li>
             </ul>
             </p>
-          </div>
+
+            <button class="btn btn-dark btn-block" type="button" data-toggle="collapse" data-target="#filmDetail" aria-expanded="false" aria-controls="filmDetail">
+            Review
+            </button>
+            <div class="collapse" id="filmDetail">
+            <div class="card card-body">
+            <p>${data.Plot}</p>
+            </div>
+            </div>
+            </div>
           `;
           document.querySelector('.myCard').innerHTML = movieDetails;
         })
@@ -122,8 +135,3 @@ function closeDetails(){
     
 }
 
-
-
-// zrobic cos z id
-// zrobic screen i wrzucic na nkamaszewski.pl
-// wrzucic na serwer home.pl
