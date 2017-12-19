@@ -28,7 +28,8 @@ body{
 
 .details{
     z-index: 10;
-    height: 100vh;
+    min-height: 100vh;
+    top: 25%;
     width: 0px;
     position: absolute;
     display: none;
@@ -49,3 +50,7 @@ tr, .myClose, .myButton{
         left: 0px;
     }
 }
+
+/* *{
+    outline: 1px solid red;
+} */

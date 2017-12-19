@@ -4,7 +4,6 @@ const findButton = document.querySelector('#findButton');
 const findInput = document.querySelector('#findInput');
 const tableWithMovies = document.querySelector('.results');
 const pageCounter = document.querySelector('.pageCounter');
-var ids =[];
 var page = 1; //default value
 
 findButton.addEventListener("click", findMovie);
@@ -36,13 +35,12 @@ function renderMovieList(tempUrl){
                 i++;
                 // if there is no photo in API base
                 myMovieList[index].Poster = myMovieList[index].Poster === "N/A" ? "assets/noImg.jpg" : myMovieList[index].Poster;                         
-                details += `<tr data="${i}">
+                details += `<tr data-id="${myMovieList[index].imdbID}">
                             <th scope="row">-</th>
                             <td><img src="${myMovieList[index].Poster}" class="minImg"></td>
                             <td>${myMovieList[index].Title}</td>
                             <td>${myMovieList[index].Year}</td>
                             </tr>`;
-                ids[i] = myMovieList[index].imdbID;
                } 
                tableWithMovies.innerHTML = details;
                listenOnRows();
@@ -79,16 +77,16 @@ function listenOnRows(){
 function renderMovieDetails(){
     openDetails();
     // take id of table row user just clicked
-    let parameterValue = this.getAttribute("data");
-    let id = ids[parameterValue];
+    let id = this.getAttribute("data-id");
 
     let userUrl = "http://www.omdbapi.com/?apikey=" + myApiKey + "&i="+ id;
 
     fetch(userUrl)
         .then((response)=>  response.json())
         .then((data)=> {
+            let poster = data.Poster === "N/A" ? "assets/noImg.jpg" : data.Poster;
             let movieDetails = `<button type="button" class="btn btn-dark myClose" onclick="closeDetails()">Close <span class="float-right" style="margin-right: 10px;">x</span></button>
-            <img class="card-img-top detailImg" src="${data.Poster}" alt="Card image cap">
+            <img class="card-img-top detailImg" src="${poster}" alt="Card image cap">
             <div class="card-body">
             <p class="card-text">
             <ul>
@@ -108,7 +106,7 @@ function renderMovieDetails(){
 
 
 function openDetails(){
-    document.querySelector('.details').style.width = "100vw";
+    document.querySelector('.details').style.width = "100%";
     document.querySelector('.details').style.display = "initial";
 
     document.querySelector('.container').style.filter = "blur(5px)";
@@ -123,10 +121,9 @@ function closeDetails(){
     document.querySelector('.container').style.filter = "blur(0px)";
     
 }
-// details: przekazywac od razu id zamiast do tymczasowej tablicy, zapisujac id w tr jako atrybut/ parametr
-// naprawic blad w details z ladowaniem zdjec ktorych nie ma
-// kotwice zrobic po klikniecu w details zeby lecialo do otwartej karty details
+
+
+
 // zrobic cos z id
-// background zrobic lzejszy
 // zrobic screen i wrzucic na nkamaszewski.pl
 // wrzucic na serwer home.pl
