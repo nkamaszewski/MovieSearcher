@@ -103,8 +103,6 @@ function renderMovieDetails(){
           `;
           document.querySelector('.myCard').innerHTML = movieDetails;
         })
-    
-
 }
 
 
@@ -125,5 +123,10 @@ function closeDetails(){
     document.querySelector('.container').style.filter = "blur(0px)";
     
 }
-// details
-//http://www.omdbapi.com/?apikey=1060572d&i=tt1285016
+// details: przekazywac od razu id zamiast do tymczasowej tablicy, zapisujac id w tr jako atrybut/ parametr
+// naprawic blad w details z ladowaniem zdjec ktorych nie ma
+// kotwice zrobic po klikniecu w details zeby lecialo do otwartej karty details
+// zrobic cos z id
+// background zrobic lzejszy
+// zrobic screen i wrzucic na nkamaszewski.pl
+// wrzucic na serwer home.pl
