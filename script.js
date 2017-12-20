@@ -7,6 +7,7 @@ const pageCounter = document.querySelector('.pageCounter');
 var page = 1; //default value
 
 findButton.addEventListener("click", findMovie);
+findButton.addEventListener("touchstart", findMovie);
 
 findInput.addEventListener("keydown", (event)=>{
     if(event.keyCode === 13)
@@ -15,17 +16,26 @@ findInput.addEventListener("keydown", (event)=>{
 
 function findMovie(){
     page = 1;
-    let userUrl = url + findInput.value + "&page=" + page;
-    renderMovieList(userUrl);
+
+    if(findInput.value !== ""){
+        document.querySelector('#errorMessage').innerHTML = "";
+        let userUrl = url + findInput.value + "&page=" + page;
+        renderMovieList(userUrl);
+    } // if input is blank and user clicked find button
+    else{
+        let details = `<small id="smallErrorMessage">Enter Your movie title!</small>`
+        document.querySelector('#errorMessage').innerHTML = details;    
+    }
 }
 
 function renderMovieList(tempUrl){
     fetch(tempUrl)
         .then((response)=>  response.json())
         .then((data)=> {
+            // if there is no any movies in the base
             if(data.Response === "False"){
-                let details = `<h5>That film is not avalaible in omdbAPI.</h5>`
-                tableWithMovies.innerHTML = details; 
+                let details = `<small id="smallErrorMessage">That film is not avalaible in omdbAPI. Check if the title is correct.</small>`
+                document.querySelector('#errorMessage').innerHTML = details; 
                 return;
             }else{
                let myMovieList = data.Search;
@@ -48,9 +58,12 @@ function renderMovieList(tempUrl){
                } 
                tableWithMovies.innerHTML = details;
                listenOnRows();
+               // shows page navigate buttons
+               document.querySelector('.navigatePagesButtons').style.display = "initial";
+               showPageCounter();
             }
         })
-    showPageCounter();
+    
     
 }
 
@@ -102,7 +115,7 @@ function renderMovieDetails(){
             </ul>
             </p>
 
-            <button class="btn btn-dark btn-block" type="button" data-toggle="collapse" data-target="#filmDetail" aria-expanded="false" aria-controls="filmDetail">
+            <button class="btn btn-dark btn-block myButton" type="button" data-toggle="collapse" data-target="#filmDetail" aria-expanded="false" aria-controls="filmDetail">
             Review
             </button>
             <div class="collapse" id="filmDetail">
@@ -135,3 +148,5 @@ function closeDetails(){
     
 }
 
+// UX :
+//  - header zmienic

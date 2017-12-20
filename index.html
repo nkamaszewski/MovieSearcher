@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="assets/movieIcon.png">
     <link rel="stylesheet" href="style.css">
     
     <title>nk App</title>
@@ -16,17 +17,21 @@
     <div class="container">
         <div class="row">
             <div class="col text-center">
-                <h4>Welcome to nk movie searcher App. Enjoy!</h4>
+                <h5>Welcome to nk movie searcher App. Enjoy!</h5>
             </div>
         </div>
         <div class="row text-center">
-            <div class="col-sm-12 offset-md-2 col-md-5 ">
+            <div class="col-sm-12 offset-md-2 col-md-5">
                     <input type="text" class="form-control" id="findInput" placeholder="Enter Your movie" autofocus="true">
+                    <div class="" id="errorMessage" style="float: left;"></div>
             </div>
             <div class="col-sm-12 col-md-3">
-                    <button type="button" class="btn btn-block myButton" id="findButton">Find movie</button>
+                    <button type="button" class="btn btn-block myButton" id="findButton">Find movie</button>          
             </div>
         </div>
+        
+           
+        
         <div class="row rowDetail">
           
             <table class="table table-bordered table-dark table-hover table-sm">
@@ -47,7 +52,7 @@
           
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 navigatePagesButtons">
               <button type="button" class="btn btn-dark float-left myButton" onclick="changePage('previous')">Previous Page</button>
               <button type="button" class="btn btn-dark float-right myButton" onclick="changePage('next')">Next Page</button>
             </div>
@@ -56,7 +61,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 text-center"><h5>Powered by omdbApi.</h5></div>
+            <div class="col-sm-12 text-center">
+                <small>Created by <a href="http://www.nkamaszewski.pl">Norbert Kamaszewski</a>. Powered by omdbApi.</small>
+            </div>
         </div>
     </div>
 

@@ -51,6 +51,11 @@ tr, .myClose, .myButton{
     }
 }
 
-/* *{
-    outline: 1px solid red;
-} */
+#smallErrorMessage{
+    color:red;
+}
+
+.navigatePagesButtons{
+    display: none;
+}
+
